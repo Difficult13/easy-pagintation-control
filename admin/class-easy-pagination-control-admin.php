@@ -1,14 +1,6 @@
 <?php
 
-/**
- * The admin-specific functionality of the plugin.
- *
- * @link       http://example.com
- * @since      1.0.0
- *
- * @package    Easy Pagination Control
- * @subpackage Easy Pagination Control/admin
- */
+namespace Difficult13\EasyPaginationControl\Admin;
 
 /**
  * The admin-specific functionality of the plugin.
@@ -16,11 +8,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    Easy Pagination Control
- * @subpackage Easy Pagination Control/admin
+ * @package    Easy_Pagination_Control
+ * @subpackage Easy_Pagination_Control/admin
  * @author     Ivan Barinov <vanbrin@ya.ru>
  */
-class Easy_Pagination_Control_Admin {
+class EasyPaginationControlAdmin {
 
 	/**
 	 * The ID of this plugin.
@@ -158,17 +150,33 @@ class Easy_Pagination_Control_Admin {
      */
     public function update_current_options() {
 
-        if (isset($_POST['result']) && !empty($_POST['result'])){
+        if( !current_user_can('manage_options') ){
+            die();
+        };
+
+        check_ajax_referer('epc_option_nonce', 'epc_nonce');
+
+        $save_data = $_POST['result'] ?? '';
+
+        if (!empty($save_data) && is_array($save_data)){
             $result = [
-                'builtin' => [],
-                'taxonomies' => [],
-                'post_types' => [],
+                'builtin' => [
+                    'entities' => []
+                ],
+                'taxonomies' => [
+                    'entities' => []
+                ],
+                'post_types' => [
+                    'entities' => []
+                ],
             ];
 
-            foreach ($_POST['result'] as $section_name => $section){
-                if (isset($result[$section_name])){
+            foreach ($save_data as $section_name => $section){
+                if (isset($result[$section_name]) && is_array($section)){
                     foreach ($section as $entity_name => $entity_count){
-                        $result[$section_name]['entities'][esc_sql($entity_name)] = esc_sql($entity_count);
+                        $escaped_count = is_numeric($entity_count) && (int) esc_sql($entity_count) >= 0 ? (int) esc_sql($entity_count) : die();
+                        $escaped_name = esc_sql(sanitize_text_field($entity_name));
+                        $result[$section_name]['entities'][$escaped_name] = $escaped_count;
                     }
                 }
 
@@ -187,7 +195,7 @@ class Easy_Pagination_Control_Admin {
      */
     private function get_formatted_types_array($post_types = [], $taxonomies = [], $current_options = []) {
 
-        $main_options_title = __('Встроенные типы', 'easy-pagination-control');
+        $main_options_title = __('Встроенные типы', __NAMESPACE__ . '\\easy-pagination-control');
         $front_page_title = __('Главная страница', 'easy-pagination-control');
         $home_title = __('Страница с последними записями', 'easy-pagination-control');
         $category_title = __('Страница категорий', 'easy-pagination-control');

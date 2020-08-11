@@ -1,14 +1,6 @@
 <?php
 
-/**
- * Register all actions and filters for the plugin
- *
- * @link       http://example.com
- * @since      1.0.0
- *
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
- */
+namespace Difficult13\EasyPaginationControl\Includes;
 
 /**
  * Register all actions and filters for the plugin.
@@ -21,7 +13,7 @@
  * @subpackage Easy_Pagination_Control/includes
  * @author     Ivan Barinov <vanbrin@ya.ru>
  */
-class Easy_Pagination_Control_Loader {
+class EasyPaginationControlLoader {
 
 	/**
 	 * The array of actions registered with WordPress.

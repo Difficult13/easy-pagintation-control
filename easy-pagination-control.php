@@ -1,19 +1,25 @@
 <?php
 
+namespace Difficult13\EasyPaginationControl;
+
+use Difficult13\EasyPaginationControl\Includes\EasyPaginationControl;
+use Difficult13\EasyPaginationControl\Includes\EasyPaginationControlActivator;
+
+
 /**
  * The plugin bootstrap file
  *
  * @link
  * @since             1.0.0
- * @package           Easy Pagination Control
+ * @package           Easy_Pagination_Control
  *
  * @wordpress-plugin
  * Plugin Name:       Easy Pagination Control
- * Plugin URI:
- * Description:       A lightweight and easy-to-configure plugin for quickly configuring the number of objects on the archives, categories, tags, taxonomies, home, and front page
- * Version:           1.0.0
+ * Plugin URI:        https://github.com/Difficult13/easy-pagintation-control
+ * Description:       Легкий и простой в настройке плагин для быстрой настройки количества объектов в архивах, категориях, тегах, таксономиях, страницах записей и главной странице
+ * Version:           1.0.1
  * Author:            Ivan Barinov
- * Author URI:
+ * Author URI:        https://github.com/Difficult13
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       easy-pagination-control
@@ -25,19 +31,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die;
 }
 
+esc_html__('Легкий и простой в настройке плагин для быстрой настройки количества объектов в архивах, категориях, тегах, таксономиях, страницах записей и главной странице', 'easy-pagination-control');
+
 /**
  * Currently plugin version.
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'EPC_VERSION', '1.0.0' );
+define( 'EPC_VERSION', '1.0.1' );
 
-function activate_easy_pagination_control() {
+function activatePlugin() {
     require_once plugin_dir_path( __FILE__ ) . 'includes/class-easy-pagination-control-activator.php';
-    Easy_Pagination_Control_Activator::activate();
+    EasyPaginationControlActivator::activate();
 }
 
-register_activation_hook( __FILE__, 'activate_easy_pagination_control' );
+register_activation_hook( __FILE__, __NAMESPACE__ . '\\activatePlugin' );
 
 /**
  * The core plugin class that is used to define internationalization,
@@ -54,10 +62,9 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-easy-pagination-control.ph
  *
  * @since    1.0.0
  */
-function run_plugin_name() {
+function runPlugin() {
     $basename = plugin_basename(__FILE__);
-	$plugin = new Easy_Pagination_Control($basename);
+	$plugin = new EasyPaginationControl($basename);
 	$plugin->run();
-
 }
-run_plugin_name();
+runPlugin();

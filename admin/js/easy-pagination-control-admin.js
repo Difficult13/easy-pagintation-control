@@ -17,7 +17,8 @@
 
 			var data = {
 				'result': {},
-				'action': 'epc_post'
+				'action': 'epc_post',
+				'epc_nonce': $('#epc_nonce').val()
 			};
 
 			var options = {};
@@ -36,11 +37,15 @@
 				data: data,
 				success:function(data){
 					if (data == 1){
-						$('#epc-submit').prop('disabled', false);
 						$('#epc-notice-success').prop('hidden', false);
 					} else {
 						$('#epc-notice-error').prop('hidden', false);
 					}
+					$('#epc-submit').prop('disabled', false);
+				},
+				error:function(a){
+					$('#epc-notice-error').prop('hidden', false);
+					$('#epc-submit').prop('disabled', false);
 				}
 			});
 		});

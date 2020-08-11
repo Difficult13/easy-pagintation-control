@@ -1,17 +1,10 @@
 <?php
 
-/**
- * The file that defines the core plugin class
- *
- * A class definition that includes attributes and functions used across both the
- * public-facing side of the site and the admin area.
- *
- * @link       http://example.com
- * @since      1.0.0
- *
- * @package    Easy Pagination Control
- * @subpackage Easy Pagination Control/includes
- */
+namespace Difficult13\EasyPaginationControl\Includes;
+
+use Difficult13\EasyPaginationControl\Includes\EasyPaginationControlLoader;
+use Difficult13\EasyPaginationControl\Includes\EasyPaginationControlI18n;
+use Difficult13\EasyPaginationControl\Admin\EasyPaginationControlAdmin;
 
 /**
  * The core plugin class.
@@ -22,11 +15,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Easy Pagination Control
- * @subpackage Easy Pagination Control/includes
+ * @package    Easy_Pagination_Control
+ * @subpackage Easy_Pagination_Control/includes
  * @author     Ivan Barinov <vanbrin@ya.ru>
  */
-class Easy_Pagination_Control {
+class EasyPaginationControl {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -34,7 +27,7 @@ class Easy_Pagination_Control {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Easy_Pagination_Control_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      EasyPaginationControlLoader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -93,9 +86,9 @@ class Easy_Pagination_Control {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Easy_Pagination_Control_Loader. Orchestrates the hooks of the plugin.
-	 * - Easy_Pagination_Control_i18n. Defines internationalization functionality.
-	 * - Easy_Pagination_Control_Admin. Defines all hooks for the admin area.
+	 * - EasyPagination_ControlLoader. Orchestrates the hooks of the plugin.
+	 * - EasyPagination_ControlI18n. Defines internationalization functionality.
+	 * - EasyPaginationControlAdmin. Defines all hooks for the admin area.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -123,7 +116,7 @@ class Easy_Pagination_Control {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-easy-pagination-control-admin.php';
 
 
-		$this->loader = new Easy_Pagination_Control_Loader();
+		$this->loader = new EasyPaginationControlLoader();
 
 	}
 
@@ -138,7 +131,7 @@ class Easy_Pagination_Control {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Easy_Pagination_Control_i18n();
+		$plugin_i18n = new EasyPaginationControlI18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -153,18 +146,13 @@ class Easy_Pagination_Control {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Easy_Pagination_Control_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new EasyPaginationControlAdmin( $this->get_plugin_name(), $this->get_version() );
 
         $this->loader->add_filter( 'plugin_action_links_'.$this->basename, $this, 'add_settings_link' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
         $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_control_page' );
         $this->loader->add_action( 'wp_ajax_epc_post', $plugin_admin, 'update_current_options' );
-
-        $this->loader->add_action( 'customize_register', $plugin_admin, 'init_customizer_gui' );
-        //$this->loader->add_action( 'customize_preview_init', $plugin_admin, 'get_epc_customizer_js' );
-        //$this->loader->add_action( 'wp_head', $plugin_admin, 'init_customizer_gui' );
-
 
         $this->loader->add_action( 'pre_get_posts', $plugin_admin, 'control_pagination' );
 	}
@@ -193,7 +181,7 @@ class Easy_Pagination_Control {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    Easy_Pagination_Control_Loader    Orchestrates the hooks of the plugin.
+	 * @return    EasyPaginationControlLoader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;
@@ -216,7 +204,7 @@ class Easy_Pagination_Control {
      */
     public function add_settings_link( $links ) {
         $settings = array(
-            '<a target="_blank" href="/wp-admin/tools.php?page=easy-pagination-control">'.__('Настройки', 'easy-pagination-control').'</a>'
+            '<a target="_blank" href="/wp-admin/tools.php?page=easy-pagination-control">'.esc_html__('Настройки', 'easy-pagination-control').'</a>'
         );
         return array_merge( $links, $settings );
     }

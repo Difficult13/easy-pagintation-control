@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: easy-pagination-control\n"
-"POT-Creation-Date: 2020-08-09 12:26+0300\n"
-"PO-Revision-Date: 2020-08-09 12:48+0300\n"
+"Project-Id-Version: Easy Pagination Control 1.1\n"
+"POT-Creation-Date: 2020-08-11 21:46+0300\n"
+"PO-Revision-Date: 2020-08-11 21:58+0300\n"
 "Last-Translator: \n"
 "Language-Team: Ivan Barinov\n"
 "Language: en_GB\n"
@@ -12,66 +12,66 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-KeywordsList: __;_e;esc_html__;esc_html_e\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: admin/class-easy-pagination-control-admin.php:180
+#: admin/class-easy-pagination-control-admin.php:198
 msgid "Встроенные типы"
 msgstr "Built-in types"
 
-#: admin/class-easy-pagination-control-admin.php:181
+#: admin/class-easy-pagination-control-admin.php:199
 msgid "Главная страница"
 msgstr "Front Page"
 
-#: admin/class-easy-pagination-control-admin.php:182
+#: admin/class-easy-pagination-control-admin.php:200
 msgid "Страница с последними записями"
 msgstr "Home"
 
-#: admin/class-easy-pagination-control-admin.php:183
+#: admin/class-easy-pagination-control-admin.php:201
 msgid "Страница категорий"
 msgstr "Categories"
 
-#: admin/class-easy-pagination-control-admin.php:184
+#: admin/class-easy-pagination-control-admin.php:202
 msgid "Страница меток"
 msgstr "Tags"
 
-#: admin/class-easy-pagination-control-admin.php:186
+#: admin/class-easy-pagination-control-admin.php:204
 msgid "Пользовательские типы записей"
 msgstr "Post types"
 
-#: admin/class-easy-pagination-control-admin.php:187
+#: admin/class-easy-pagination-control-admin.php:205
 msgid "Пользовательские таксономии"
 msgstr "Taxonomies"
 
-#: admin/partials/easy-pagination-control-admin-display.php:23
+#: admin/partials/easy-pagination-control-admin-display.php:22
 msgid "Easy Pagination Control"
 msgstr "Easy Pagination Control"
 
-#: admin/partials/easy-pagination-control-admin-display.php:25
+#: admin/partials/easy-pagination-control-admin-display.php:24
 msgid "Настройки успешно сохранены"
 msgstr "Settings were saved successfully"
 
-#: admin/partials/easy-pagination-control-admin-display.php:28
+#: admin/partials/easy-pagination-control-admin-display.php:27
 msgid "Произошла ошибка. Попробуйте еще раз."
 msgstr "An error occurred. Try again."
 
-#: admin/partials/easy-pagination-control-admin-display.php:32
+#: admin/partials/easy-pagination-control-admin-display.php:31
 msgid ""
 "Введите число нужного количества элементов на странице напротив "
 "соответствующей сущности и нажмите кнопку \"Сохранить изменения\""
 msgstr ""
 "Enter the number of the desired number of elements on the page opposite the "
-"corresponding entity and click \" Save settings\""
+"corresponding entity and click \" Save changes\""
 
-#: admin/partials/easy-pagination-control-admin-display.php:35
+#: admin/partials/easy-pagination-control-admin-display.php:34
 msgid "Примечание."
 msgstr "Note."
 
-#: admin/partials/easy-pagination-control-admin-display.php:35
+#: admin/partials/easy-pagination-control-admin-display.php:34
 msgid "Значение \"0\" означает, что применяются стандартные настройки WP"
 msgstr "The value \"0\" means that standard WP settings are applied"
 
-#: admin/partials/easy-pagination-control-admin-display.php:62
+#: admin/partials/easy-pagination-control-admin-display.php:61
 msgid "элементов на странице"
 msgstr "elements on the page"
 
@@ -79,6 +79,16 @@ msgstr "elements on the page"
 msgid "Сохранить изменения"
 msgstr "Save changes"
 
-#: includes/class-easy-pagination-control.php:212
+#: easy-pagination-control.php:34
+msgid ""
+"Легкий и простой в настройке плагин для быстрой настройки количества "
+"объектов в архивах, категориях, тегах, таксономиях, страницах записей и "
+"главной странице"
+msgstr ""
+"A lightweight and easy-to-configure plugin for quickly configuring the "
+"number of objects on the archives, categories, tags, taxonomies, home, and "
+"front page"
+
+#: includes/class-easy-pagination-control.php:207
 msgid "Настройки"
 msgstr "Settings"

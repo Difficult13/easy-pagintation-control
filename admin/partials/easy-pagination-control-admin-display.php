@@ -19,19 +19,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="wrap">
 
     <div class="epc-container" id="epc-body">
-        <h1><?php _e('Easy Pagination Control', 'easy-pagination-control') ?></h1>
+        <h1><?php esc_html_e('Easy Pagination Control', 'easy-pagination-control') ?></h1>
 
-        <?php $success_message = __('Настройки успешно сохранены', 'easy-pagination-control'); ?>
-        <div id="epc-notice-success" hidden class="notice notice-success"> <p><?= $success_message ?></p></div>
+        <?php $success_message = esc_html__('Настройки успешно сохранены', 'easy-pagination-control'); ?>
+        <div id="epc-notice-success" hidden class="notice notice-success"> <p><?php echo $success_message ?></p></div>
 
-        <?php $error_message = __('Произошла ошибка. Попробуйте еще раз.', 'easy-pagination-control'); ?>
-        <div id="epc-notice-error" hidden class="notice notice-error"> <p><?= $error_message ?></p></div>
+        <?php $error_message = esc_html__('Произошла ошибка. Попробуйте еще раз.', 'easy-pagination-control'); ?>
+        <div id="epc-notice-error" hidden class="notice notice-error"> <p><?php echo $error_message ?></p></div>
 
         <p class="epc-tooltip">
-            <?php _e('Введите число нужного количества элементов на странице напротив соответствующей сущности и нажмите кнопку "Сохранить изменения"', 'easy-pagination-control') ?>
+            <?php esc_html_e('Введите число нужного количества элементов на странице напротив соответствующей сущности и нажмите кнопку "Сохранить изменения"', 'easy-pagination-control') ?>
         </p>
         <p class="epc-tooltip">
-            <strong><?php _e('Примечание.', 'easy-pagination-control') ?></strong> <?php _e('Значение "0" означает, что применяются стандартные настройки WP', 'easy-pagination-control') ?>
+            <strong><?php esc_html_e('Примечание.', 'easy-pagination-control') ?></strong> <?php esc_html_e('Значение "0" означает, что применяются стандартные настройки WP', 'easy-pagination-control') ?>
         </p>
         <hr>
         <form id="epc-form" action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" method="post">
@@ -44,8 +44,8 @@ if ( ! defined( 'ABSPATH' ) ) {
                     }
                     ?>
 
-                    <div class="epc-options-section" id='<?= $section_name ?>'>
-                        <h2><?= $section['type_name'] ?></h2>
+                    <div class="epc-options-section" id='<?php echo esc_attr($section_name); ?>'>
+                        <h2><?php echo esc_html($section['type_name']); ?></h2>
                         <table class="form-table">
                             <tbody>
                             <?php
@@ -53,12 +53,12 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 ?>
                                 <tr>
                                     <td>
-                                        <label for="<?= $entity_name ?>"><?= $row['name'] ?></label>
+                                        <label for="<?php echo esc_attr($entity_name) ?>"><?php echo esc_html($row['name']); ?></label>
                                     </td>
                                     <td>
                                         <input type="number" step="1" min="0" class="small-text epc-number-input"
-                                               id="<?= $entity_name ?>" name="<?= $entity_name ?>" value="<?= $row['count'] ?>">
-                                        <span> <?php _e('элементов на странице', 'easy-pagination-control') ?></span>
+                                               id="<?php echo esc_attr($entity_name) ?>" name="<?php echo esc_attr($entity_name) ?>" value="<?php echo esc_attr($row['count']); ?>">
+                                        <span> <?php esc_html_e('элементов на странице', 'easy-pagination-control') ?></span>
                                     </td>
                                 </tr>
                                 <?php
@@ -72,7 +72,8 @@ if ( ! defined( 'ABSPATH' ) ) {
                 }
                 ?>
                 <input type="hidden" name="action" value="epc_post">
-                <button id="epc-submit" type="submit" class="button button-primary epc-submit"><?php _e('Сохранить изменения', 'easy-pagination-control') ?></button>
+                <input type="hidden" name="epc_nonce" id="epc_nonce" value="<?php echo wp_create_nonce('epc_option_nonce'); ?>">
+                <button id="epc-submit" type="submit" class="button button-primary epc-submit"><?php esc_html_e('Сохранить изменения', 'easy-pagination-control') ?></button>
             </div>
         </form>
     </div>

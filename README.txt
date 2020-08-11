@@ -2,7 +2,7 @@
 Tags: pagination
 Requires at least: 5.4.2
 Tested up to: 5.4.2
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,4 +64,25 @@ For more control over pagination within the main WP query
 
 == Changelog ==
 
--
+
+= 1.0.1 =
+* Fix bug with default update template
+* Fix bug with disabled button after error try
+
+* Change '<?=' to '<?php echo' for better compatibility
+
+* Added error handler for ajax
+* All data is output from the database via escape functions
+* Added escaping for default option template
+* Added additional array-checking for form data
+* Added additional validation of the number of elements on the page before writing to the database
+* Added sanitize function for "name" option
+* Added additional verification of user rights before saving changes
+* Added nonce field for the plugin form
+
+* Add plugin description to pot
+
+* Set the unique namespace for plugin
+* Change class's names to 'StudlyCase'
+
+* Share the plugin to github
