@@ -1,0 +1,17 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+
+.epc-container{
+    max-width: 800px;
+}
+
+.epc-options-section{
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.epc-number-input{
+    margin-right: 15px;
+}

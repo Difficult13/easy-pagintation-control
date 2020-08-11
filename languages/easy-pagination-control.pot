@@ -1,0 +1,84 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Easy Pagination Control 1.0\n"
+"POT-Creation-Date: 2020-08-09 16:06+0300\n"
+"PO-Revision-Date: 2020-08-09 16:06+0300\n"
+"Last-Translator: \n"
+"Language-Team: Ivan Barinov\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Language: ru\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin/class-easy-pagination-control-admin.php:190
+msgid "Встроенные типы"
+msgstr ""
+
+#: admin/class-easy-pagination-control-admin.php:191
+msgid "Главная страница"
+msgstr ""
+
+#: admin/class-easy-pagination-control-admin.php:192
+msgid "Страница с последними записями"
+msgstr ""
+
+#: admin/class-easy-pagination-control-admin.php:193
+msgid "Страница категорий"
+msgstr ""
+
+#: admin/class-easy-pagination-control-admin.php:194
+msgid "Страница меток"
+msgstr ""
+
+#: admin/class-easy-pagination-control-admin.php:196
+msgid "Пользовательские типы записей"
+msgstr ""
+
+#: admin/class-easy-pagination-control-admin.php:197
+msgid "Пользовательские таксономии"
+msgstr ""
+
+#: admin/partials/easy-pagination-control-admin-display.php:23
+msgid "Easy Pagination Control"
+msgstr ""
+
+#: admin/partials/easy-pagination-control-admin-display.php:25
+msgid "Настройки успешно сохранены"
+msgstr ""
+
+#: admin/partials/easy-pagination-control-admin-display.php:28
+msgid "Произошла ошибка. Попробуйте еще раз."
+msgstr ""
+
+#: admin/partials/easy-pagination-control-admin-display.php:32
+msgid ""
+"Введите число нужного количества элементов на странице напротив "
+"соответствующей сущности и нажмите кнопку \"Сохранить изменения\""
+msgstr ""
+
+#: admin/partials/easy-pagination-control-admin-display.php:35
+msgid "Примечание."
+msgstr ""
+
+#: admin/partials/easy-pagination-control-admin-display.php:35
+msgid "Значение \"0\" означает, что применяются стандартные настройки WP"
+msgstr ""
+
+#: admin/partials/easy-pagination-control-admin-display.php:62
+msgid "элементов на странице"
+msgstr ""
+
+#: admin/partials/easy-pagination-control-admin-display.php:76
+msgid "Сохранить изменения"
+msgstr ""
+
+#: includes/class-easy-pagination-control.php:214
+msgid "Настройки"
+msgstr ""
