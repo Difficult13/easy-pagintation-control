@@ -1,8 +1,10 @@
-=== Plugin Name ===
+=== Easy Pagination Control ===
+Contributors: pet1t
 Tags: pagination
 Requires at least: 5.4.2
-Tested up to: 5.4.2
-Stable tag: 1.0.1
+Tested up to: 5.5
+Requires PHP: 5.6
+Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,10 +62,9 @@ For more control over pagination within the main WP query
 
 == Screenshots ==
 
-1. The "Easy Pagination Control" page.
+1. The Easy Pagination Plugin settings
 
 == Changelog ==
-
 
 = 1.0.1 =
 * Fix bug with default update template
