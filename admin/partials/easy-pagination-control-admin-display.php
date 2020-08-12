@@ -21,11 +21,11 @@ if ( ! defined( 'ABSPATH' ) ) {
     <div class="epc-container" id="epc-body">
         <h1><?php esc_html_e('Easy Pagination Control', 'easy-pagination-control') ?></h1>
 
-        <?php $success_message = esc_html__('Настройки успешно сохранены', 'easy-pagination-control'); ?>
-        <div id="epc-notice-success" hidden class="notice notice-success"> <p><?php echo $success_message ?></p></div>
+        <?php $success_message = __('Настройки успешно сохранены', 'easy-pagination-control'); ?>
+        <div id="epc-notice-success" hidden class="notice notice-success"> <p><?php echo esc_html($success_message); ?></p></div>
 
-        <?php $error_message = esc_html__('Произошла ошибка. Попробуйте еще раз.', 'easy-pagination-control'); ?>
-        <div id="epc-notice-error" hidden class="notice notice-error"> <p><?php echo $error_message ?></p></div>
+        <?php $error_message = __('Произошла ошибка. Попробуйте еще раз.', 'easy-pagination-control'); ?>
+        <div id="epc-notice-error" hidden class="notice notice-error"> <p><?php echo esc_html($error_message); ?></p></div>
 
         <p class="epc-tooltip">
             <?php esc_html_e('Введите число нужного количества элементов на странице напротив соответствующей сущности и нажмите кнопку "Сохранить изменения"', 'easy-pagination-control') ?>
