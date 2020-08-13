@@ -57,7 +57,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                     </td>
                                     <td>
                                         <input type="number" step="1" min="0" class="small-text epc-number-input"
-                                               id="<?php echo esc_attr($entity_name) ?>" name="<?php echo esc_attr($entity_name) ?>" value="<?php echo esc_attr($row['count']); ?>">
+                                               id="<?php echo esc_attr($entity_name) ?>" name="<?php echo esc_attr($entity_name) ?>" value="<?php echo esc_attr($row['count']); ?>" required>
                                         <span> <?php esc_html_e('элементов на странице', 'easy-pagination-control') ?></span>
                                     </td>
                                 </tr>

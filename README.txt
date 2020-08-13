@@ -1,6 +1,6 @@
 === Easy Pagination Control ===
 Contributors: pet1t
-Tags: pagination
+Tags: pagination, usability, control, easy
 Requires at least: 5.4.2
 Tested up to: 5.5
 Requires PHP: 5.6
@@ -39,12 +39,15 @@ For more control over pagination within the main WP query
 
 == Changelog ==
 
+= 1.0.2 =
+
+* Set required attr to input field
+* Update readme
+
 = 1.0.1 =
 * Fix bug with default update template
 * Fix bug with disabled button after error try
-
 * Change '<?=' to '<?php echo' for better compatibility
-
 * Added error handler for ajax
 * All data is output from the database via escape functions
 * Added escaping for default option template
@@ -53,10 +56,7 @@ For more control over pagination within the main WP query
 * Added sanitize function for "name" option
 * Added additional verification of user rights before saving changes
 * Added nonce field for the plugin form
-
 * Add plugin description to pot
-
 * Set the unique namespace for plugin
 * Change class's names to 'StudlyCase'
-
 * Share the plugin to github
