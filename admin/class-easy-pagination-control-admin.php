@@ -195,14 +195,15 @@ class EasyPaginationControlAdmin {
      */
     private function get_formatted_types_array($post_types = [], $taxonomies = [], $current_options = []) {
 
-        $main_options_title = __('Встроенные типы', __NAMESPACE__ . '\\easy-pagination-control');
-        $front_page_title = __('Главная страница', 'easy-pagination-control');
-        $home_title = __('Страница с последними записями', 'easy-pagination-control');
-        $category_title = __('Страница категорий', 'easy-pagination-control');
-        $tag_title = __('Страница меток', 'easy-pagination-control');
+        $main_options_title = __('Built-in types', 'easy-pagination-control');
+        $front_page_title = __('Front Page', 'easy-pagination-control');
+        $home_title = __('Home', 'easy-pagination-control');
+        $category_title = __('Categories', 'easy-pagination-control');
+        $tag_title = __('Tags', 'easy-pagination-control');
+        $search_title = __('Search Page', 'easy-pagination-control');
 
-        $archive_title = __('Пользовательские типы записей', 'easy-pagination-control');
-        $tax_title = __('Пользовательские таксономии', 'easy-pagination-control');
+        $archive_title = __('Post types', 'easy-pagination-control');
+        $tax_title = __('Taxonomies', 'easy-pagination-control');
 
 
         $default_template = [
@@ -223,6 +224,10 @@ class EasyPaginationControlAdmin {
                     ],
                     'builtin4' => [
                         'name' => $tag_title,
+                        'count' => 0
+                    ],
+                    'builtin5' => [
+                        'name' => $search_title,
                         'count' => 0
                     ],
                 ]
@@ -298,9 +303,15 @@ class EasyPaginationControlAdmin {
                     }
                 }
 
+                if ($query->is_search()){
+                    if (isset($options['builtin']['entities']['builtin5']) && (int)$options['builtin']['entities']['builtin5'] !== 0 ){
+                        $query->set( 'posts_per_page', (int)$options['builtin']['entities']['builtin5'] );
+                    }
+                }
+
                 if ($query->is_tax()){
-                    if (isset($options['taxonomies']['entities'][key($query->query_vars)]) && (int)$options['taxonomies']['entities'][key($query->query_vars)] !== 0 ){
-                        $query->set( 'posts_per_page', (int)$options['taxonomies']['entities'][key($query->query_vars)] );
+                    if ( !empty($query->tax_query) && isset($options['taxonomies']['entities'][key($query->tax_query->queried_terms)]) && $options['taxonomies']['entities'][key($query->tax_query->queried_terms)] !== 0 ){
+                        $query->set( 'posts_per_page', (int)$options['taxonomies']['entities'][key($query->tax_query->queried_terms)] );
                     }
                 }
 

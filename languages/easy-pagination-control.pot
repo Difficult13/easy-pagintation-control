@@ -1,47 +1,51 @@
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Easy Pagination Control 1.1\n"
-"POT-Creation-Date: 2020-08-11 21:34+0300\n"
-"PO-Revision-Date: 2020-08-11 21:34+0300\n"
+"Project-Id-Version: Easy Pagination Control\n"
+"POT-Creation-Date: 2020-08-15 13:09+0300\n"
+"PO-Revision-Date: 2020-08-15 13:05+0300\n"
 "Last-Translator: \n"
 "Language-Team: Ivan Barinov\n"
-"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3\n"
 "X-Poedit-Basepath: ..\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en\n"
 "X-Poedit-KeywordsList: __;_e;esc_html__;esc_html_e\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: admin/class-easy-pagination-control-admin.php:198
-msgid "Встроенные типы"
+msgid "Built-in types"
 msgstr ""
 
 #: admin/class-easy-pagination-control-admin.php:199
-msgid "Главная страница"
+msgid "Front Page"
 msgstr ""
 
 #: admin/class-easy-pagination-control-admin.php:200
-msgid "Страница с последними записями"
+msgid "Home"
 msgstr ""
 
 #: admin/class-easy-pagination-control-admin.php:201
-msgid "Страница категорий"
+msgid "Categories"
 msgstr ""
 
 #: admin/class-easy-pagination-control-admin.php:202
-msgid "Страница меток"
+msgid "Tags"
 msgstr ""
 
-#: admin/class-easy-pagination-control-admin.php:204
-msgid "Пользовательские типы записей"
+#: admin/class-easy-pagination-control-admin.php:203
+msgid "Search Page"
 msgstr ""
 
 #: admin/class-easy-pagination-control-admin.php:205
-msgid "Пользовательские таксономии"
+msgid "Post types"
+msgstr ""
+
+#: admin/class-easy-pagination-control-admin.php:206
+msgid "Taxonomies"
 msgstr ""
 
 #: admin/partials/easy-pagination-control-admin-display.php:22
@@ -49,42 +53,37 @@ msgid "Easy Pagination Control"
 msgstr ""
 
 #: admin/partials/easy-pagination-control-admin-display.php:24
-msgid "Настройки успешно сохранены"
+msgid "Settings were saved successfully"
 msgstr ""
 
 #: admin/partials/easy-pagination-control-admin-display.php:27
-msgid "Произошла ошибка. Попробуйте еще раз."
+msgid "An error occurred. Try again."
 msgstr ""
 
 #: admin/partials/easy-pagination-control-admin-display.php:31
-msgid ""
-"Введите число нужного количества элементов на странице напротив "
-"соответствующей сущности и нажмите кнопку \"Сохранить изменения\""
+msgid "Enter the number of the desired number of elements on the page opposite the corresponding entity and click \"Save changes\""
 msgstr ""
 
 #: admin/partials/easy-pagination-control-admin-display.php:34
-msgid "Примечание."
+msgid "Note."
 msgstr ""
 
 #: admin/partials/easy-pagination-control-admin-display.php:34
-msgid "Значение \"0\" означает, что применяются стандартные настройки WP"
+msgid "The value \"0\" means that standard WP settings are applied"
 msgstr ""
 
 #: admin/partials/easy-pagination-control-admin-display.php:61
-msgid "элементов на странице"
+msgid "elements on the page"
 msgstr ""
 
 #: admin/partials/easy-pagination-control-admin-display.php:76
-msgid "Сохранить изменения"
+msgid "Save changes"
 msgstr ""
 
 #: easy-pagination-control.php:34
-msgid ""
-"Легкий и простой в настройке плагин для быстрой настройки количества "
-"объектов в архивах, категориях, тегах, таксономиях, страницах записей и "
-"главной странице"
+msgid "A lightweight and easy-to-configure plugin for quickly configuring the number of objects on the archives, categories, tags, taxonomies, home, search page, and front page"
 msgstr ""
 
 #: includes/class-easy-pagination-control.php:207
-msgid "Настройки"
+msgid "Settings"
 msgstr ""

@@ -204,7 +204,7 @@ class EasyPaginationControl {
      */
     public function add_settings_link( $links ) {
         $settings = array(
-            '<a target="_blank" href="/wp-admin/tools.php?page=easy-pagination-control">'.esc_html__('Настройки', 'easy-pagination-control').'</a>'
+            '<a target="_blank" href="/wp-admin/tools.php?page=easy-pagination-control">'.esc_html__('Settings', 'easy-pagination-control').'</a>'
         );
         return array_merge( $links, $settings );
     }

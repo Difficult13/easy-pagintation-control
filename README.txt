@@ -3,12 +3,12 @@ Contributors: pet1t
 Tags: pagination, usability, control, easy
 Requires at least: 5.4.2
 Tested up to: 5.5
-Requires PHP: 5.6
+Requires PHP: 7.0
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A lightweight and easy-to-configure plugin for quickly configuring the number of objects on the archives, categories, tags, taxonomies, home, and front page
+A lightweight and easy-to-configure plugin for quickly configuring the number of objects on the archives, categories, tags, taxonomies, home, search page, and front page
 
 == Description ==
 
@@ -38,6 +38,14 @@ For more control over pagination within the main WP query
 1. The Easy Pagination Plugin settings
 
 == Changelog ==
+
+= 1.0.3 =
+
+* Update requirements for plugin (php7.0)
+* Update readme
+* Fix taxonomy pagination
+* Add search page options
+* Change default language to en_US
 
 = 1.0.2 =
 
