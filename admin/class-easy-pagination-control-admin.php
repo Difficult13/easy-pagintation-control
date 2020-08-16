@@ -280,51 +280,88 @@ class EasyPaginationControlAdmin {
      * @since    1.0.0
      */
     public function control_pagination($query) {
-        if (!empty($options = $this->get_current_options())){
-            if ( !is_admin() && $query->is_main_query() ) {
 
-                if ($query->is_front_page()){
-                    if (isset($options['builtin']['entities']['builtin1']) && (int)$options['builtin']['entities']['builtin1'] !== 0 ){
-                        $query->set( 'posts_per_page', (int)$options['builtin']['entities']['builtin1'] );
-                    }
-                }
-
-                if ($query->is_home() && !$query->is_front_page()){
-                    if (isset($options['builtin']['entities']['builtin2']) && (int)$options['builtin']['entities']['builtin2'] !== 0 ){
-                        $query->set( 'posts_per_page', (int)$options['builtin']['entities']['builtin2'] );
-                    }
-                }
-
-                if ($query->is_category()){
-                    if (isset($options['builtin']['entities']['builtin3']) && (int)$options['builtin']['entities']['builtin3'] !== 0 ){
-                        $query->set( 'posts_per_page', (int)$options['builtin']['entities']['builtin3'] );
-                    }
-                }
-
-                if ($query->is_tag()){
-                    if (isset($options['builtin']['entities']['builtin4']) && (int)$options['builtin']['entities']['builtin4'] !== 0 ){
-                        $query->set( 'posts_per_page', (int)$options['builtin']['entities']['builtin4'] );
-                    }
-                }
-
-                if ($query->is_search()){
-                    if (isset($options['builtin']['entities']['builtin5']) && (int)$options['builtin']['entities']['builtin5'] !== 0 ){
-                        $query->set( 'posts_per_page', (int)$options['builtin']['entities']['builtin5'] );
-                    }
-                }
-
-                if ($query->is_tax()){
-                    if ( !empty($query->tax_query) && isset($options['taxonomies']['entities'][key($query->tax_query->queried_terms)]) && $options['taxonomies']['entities'][key($query->tax_query->queried_terms)] !== 0 ){
-                        $query->set( 'posts_per_page', (int)$options['taxonomies']['entities'][key($query->tax_query->queried_terms)] );
-                    }
-                }
-
-                if ($query->is_archive() && !$query->is_category() && !$query->is_tag() && !$query->is_tax()){
-                    if (isset($options['post_types']['entities'][$query->query_vars['post_type']]) && (int)$options['post_types']['entities'][$query->query_vars['post_type']] !== 0 ){
-                        $query->set( 'posts_per_page', (int)$options['post_types']['entities'][$query->query_vars['post_type']] );
-                    }
-                }
+        if ( !empty($options = $this->get_current_options()) && !is_admin() && $query->is_main_query() ) {
+            $post_per_page = $this->get_posts_per_page($query, $options);
+            if (!empty($post_per_page)){
+                $query->set( 'posts_per_page', $post_per_page );
             }
         }
+
+    }
+
+
+    /**
+     * Allows you to give the correct number of elements on the page when using get_option('posts_per_page')
+     *
+     * @since    1.0.5
+     */
+    public function posts_per_page_interception( $value ) {
+
+        global $wp_query;
+
+        if ( !empty($options = $this->get_current_options()) && !is_admin() && !empty($wp_query->query_vars) ) {
+            $post_per_page = $this->get_posts_per_page($wp_query, $options);
+            if (!empty($post_per_page)){
+                return $post_per_page;
+            }
+        }
+        return $value;
+    }
+
+
+    /**
+     * Get posts per page for current page type
+     *
+     * @since    1.0.5
+     *
+     * @param $query
+     * @param $options
+     * @return integer
+     */
+    private function get_posts_per_page( $query, $options ) {
+        if ($query->is_front_page()){
+            if (isset($options['builtin']['entities']['builtin1'])){
+                return (int)$options['builtin']['entities']['builtin1'];
+            }
+        }
+
+        if ($query->is_home() && !$query->is_front_page()){
+            if (isset($options['builtin']['entities']['builtin2'])){
+                return (int)$options['builtin']['entities']['builtin2'];
+            }
+        }
+
+        if ($query->is_category()){
+            if (isset($options['builtin']['entities']['builtin3'])){
+                return (int)$options['builtin']['entities']['builtin3'];
+            }
+        }
+
+        if ($query->is_tag()){
+            if (isset($options['builtin']['entities']['builtin4'])){
+                return (int)$options['builtin']['entities']['builtin4'];
+            }
+        }
+
+        if ($query->is_search()){
+            if (isset($options['builtin']['entities']['builtin5'])){
+                return (int)$options['builtin']['entities']['builtin5'];
+            }
+        }
+
+        if ($query->is_tax()){
+            if ( !empty($query->tax_query) && isset($options['taxonomies']['entities'][key($query->tax_query->queried_terms)])){
+                return (int)$options['taxonomies']['entities'][key($query->tax_query->queried_terms)];
+            }
+        }
+
+        if ($query->is_archive() && !$query->is_category() && !$query->is_tag() && !$query->is_tax()){
+            if (isset($options['post_types']['entities'][$query->query_vars['post_type']])){
+                return (int)$options['post_types']['entities'][$query->query_vars['post_type']];
+            }
+        }
+
+        return 0;
     }
 }

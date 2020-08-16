@@ -39,6 +39,10 @@ For more control over pagination within the main WP query
 
 == Changelog ==
 
+= 1.0.5 =
+
+* Add 'option_posts_per_page' hook to return the correct number of elements on the page when using this plugin
+
 = 1.0.4 =
 
 * Now plugin styles and scripts are enabled only on the plugin page
