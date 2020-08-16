@@ -17,7 +17,7 @@ use Difficult13\EasyPaginationControl\Includes\EasyPaginationControlActivator;
  * Plugin Name:       Easy Pagination Control
  * Plugin URI:        https://github.com/Difficult13/easy-pagintation-control
  * Description:       A lightweight and easy-to-configure plugin for quickly configuring the number of objects on the archives, categories, tags, taxonomies, home, search page, and front page
- * Version:           1.0.3
+ * Version:           1.0.4
  * Author:            Ivan Barinov
  * Author URI:        https://github.com/Difficult13
  * License:           GPL-2.0+
@@ -38,7 +38,7 @@ esc_html__('A lightweight and easy-to-configure plugin for quickly configuring t
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'EPC_VERSION', '1.0.3' );
+define( 'EPC_VERSION', '1.0.4' );
 
 function activatePlugin() {
     require_once plugin_dir_path( __FILE__ ) . 'includes/class-easy-pagination-control-activator.php';
