@@ -61,9 +61,11 @@ class EasyPaginationControlAdmin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_styles() {
+	public function enqueue_styles( $hook ) {
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/easy-pagination-control-admin.css', array(), $this->version, 'all' );
+        if ( $hook === 'tools_page_' . $this->plugin_name ){
+            wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/easy-pagination-control-admin.css', array(), $this->version, 'all' );
+        }
 
 	}
 
@@ -72,9 +74,11 @@ class EasyPaginationControlAdmin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts() {
+	public function enqueue_scripts( $hook ) {
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/easy-pagination-control-admin.js', array( 'jquery' ), $this->version, false );
+        if ( $hook === 'tools_page_' . $this->plugin_name ) {
+            wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/easy-pagination-control-admin.js', array('jquery'), $this->version, false);
+        }
 
 	}
 

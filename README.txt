@@ -39,6 +39,10 @@ For more control over pagination within the main WP query
 
 == Changelog ==
 
+= 1.0.4 =
+
+* Now plugin styles and scripts are enabled only on the plugin page
+
 = 1.0.3 =
 
 * Update requirements for plugin (php7.0)

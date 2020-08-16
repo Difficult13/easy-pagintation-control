@@ -73,7 +73,7 @@ class EasyPaginationControl {
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->plugin_name = 'Easy Pagination Control';
+		$this->plugin_name = 'easy-pagination-control';
         $this->basename = $basename;
 
 		$this->load_dependencies();
