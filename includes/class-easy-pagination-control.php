@@ -148,12 +148,9 @@ class EasyPaginationControl {
 
 		$plugin_admin = new EasyPaginationControlAdmin( $this->get_plugin_name(), $this->get_version() );
 
-        $this->loader->add_filter( 'plugin_action_links_'.$this->basename, $this, 'add_settings_link' );
+        $this->loader->add_filter( 'plugin_action_links_'.$this->basename, $plugin_admin, 'add_settings_link' );
         $this->loader->add_filter( 'option_posts_per_page', $plugin_admin, 'posts_per_page_interception' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-        $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_control_page' );
-        $this->loader->add_action( 'wp_ajax_epc_post', $plugin_admin, 'update_current_options' );
+        $this->loader->add_action( 'admin_init', $plugin_admin, 'register_options' );
         $this->loader->add_action( 'pre_get_posts', $plugin_admin, 'control_pagination' );
 	}
 
@@ -196,17 +193,5 @@ class EasyPaginationControl {
 	public function get_version() {
 		return $this->version;
 	}
-
-    /**
-     * Add settings link under title
-     *
-     * @since     1.0.0
-     */
-    public function add_settings_link( $links ) {
-        $settings = array(
-            '<a target="_blank" href="/wp-admin/tools.php?page=easy-pagination-control">'.esc_html__('Settings', 'easy-pagination-control').'</a>'
-        );
-        return array_merge( $links, $settings );
-    }
 
 }

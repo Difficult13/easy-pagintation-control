@@ -39,6 +39,12 @@ For more control over pagination within the main WP query
 
 == Changelog ==
 
+= 1.1.0 =
+
+* Change "Options API" to "Settings API"
+* Moved the plugin settings page to the standard WP section "Reading"
+* General code refactoring
+
 = 1.0.5 =
 
 * Add 'option_posts_per_page' hook to return the correct number of elements on the page when using this plugin

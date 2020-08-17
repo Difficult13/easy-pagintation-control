@@ -33,13 +33,14 @@ class EasyPaginationControlAdmin {
 	private $version;
 
     /**
-     * The option's name of this plugin.
+     * The default settings of plugin
      *
-     * @since    1.0.0
+     * @since    1.1.0
      * @access   private
-     * @var      string    $option_name    The current version of this plugin.
+     * @var      array
      */
-    private $option_name;
+	private $default_settings;
+
 
 	/**
 	 * Initialize the class and set its properties.
@@ -52,59 +53,23 @@ class EasyPaginationControlAdmin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-        $this->option_name = 'epc_options';
 
+        $this->default_settings = [
+            'plugin-title' => __('Easy Pagination Control', 'easy-pagination-control'),
+		    'sections' => [
+                'builtin'  => __('Built-in types', 'easy-pagination-control'),
+                'taxonomies' => __('Taxonomies', 'easy-pagination-control'),
+                'post_types' => __('Post types', 'easy-pagination-control')
+            ],
+            'builtin' => [
+                'front-page' => __('Front Page', 'easy-pagination-control'),
+                'home' => __('Home', 'easy-pagination-control'),
+                'categories' => __('Categories', 'easy-pagination-control'),
+                'tags' => __('Tags', 'easy-pagination-control'),
+                'search' => __('Search Page', 'easy-pagination-control'),
+            ]
+        ];
 	}
-
-	/**
-	 * Register the stylesheets for the admin area.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_styles( $hook ) {
-
-        if ( $hook === 'tools_page_' . $this->plugin_name ){
-            wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/easy-pagination-control-admin.css', array(), $this->version, 'all' );
-        }
-
-	}
-
-	/**
-	 * Register the JavaScript for the admin area.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_scripts( $hook ) {
-
-        if ( $hook === 'tools_page_' . $this->plugin_name ) {
-            wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/easy-pagination-control-admin.js', array('jquery'), $this->version, false);
-        }
-
-	}
-
-    /**
-     * Register View for the admin area.
-     *
-     * @since    1.0.0
-     */
-    public function add_control_page() {
-
-        add_submenu_page( 'tools.php', 'Easy Pagination Control', 'Easy Pagination Control', 'manage_options', 'easy-pagination-control', array($this, 'get_view_control_page') );
-
-    }
-
-    /**
-     * Callback View for the admin area.
-     *
-     * @since    1.0.0
-     */
-    public function get_view_control_page() {
-
-        $data = $this->get_formatted_types_array($this->get_post_types(), $this->get_taxonomies(), $this->get_current_options());
-
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/easy-pagination-control-admin-display.php';
-
-    }
 
     /**
      * Get Taxonomies
@@ -143,172 +108,9 @@ class EasyPaginationControlAdmin {
      * @return    array    The array with current options
      */
     private function get_current_options() {
-        return get_option($this->option_name);
+        return get_option('epc_options');
 
     }
-
-    /**
-     * Update Current Options
-     *
-     * @since    1.0.0
-     */
-    public function update_current_options() {
-
-        if( !current_user_can('manage_options') ){
-            die();
-        };
-
-        check_ajax_referer('epc_option_nonce', 'epc_nonce');
-
-        $save_data = $_POST['result'] ?? '';
-
-        if (!empty($save_data) && is_array($save_data)){
-            $result = [
-                'builtin' => [
-                    'entities' => []
-                ],
-                'taxonomies' => [
-                    'entities' => []
-                ],
-                'post_types' => [
-                    'entities' => []
-                ],
-            ];
-
-            foreach ($save_data as $section_name => $section){
-                if (isset($result[$section_name]) && is_array($section)){
-                    foreach ($section as $entity_name => $entity_count){
-                        $escaped_count = is_numeric($entity_count) && (int) esc_sql($entity_count) >= 0 ? (int) esc_sql($entity_count) : die();
-                        $escaped_name = esc_sql(sanitize_text_field($entity_name));
-                        $result[$section_name]['entities'][$escaped_name] = $escaped_count;
-                    }
-                }
-
-            }
-            update_option($this->option_name, $result);
-            echo '1';
-        }
-        die();
-    }
-
-    /**
-     * Get Post Types
-     *
-     * @since    1.0.0
-     * @return    array    The formatted array for template
-     */
-    private function get_formatted_types_array($post_types = [], $taxonomies = [], $current_options = []) {
-
-        $main_options_title = __('Built-in types', 'easy-pagination-control');
-        $front_page_title = __('Front Page', 'easy-pagination-control');
-        $home_title = __('Home', 'easy-pagination-control');
-        $category_title = __('Categories', 'easy-pagination-control');
-        $tag_title = __('Tags', 'easy-pagination-control');
-        $search_title = __('Search Page', 'easy-pagination-control');
-
-        $archive_title = __('Post types', 'easy-pagination-control');
-        $tax_title = __('Taxonomies', 'easy-pagination-control');
-
-
-        $default_template = [
-            'builtin' => [
-                'type_name' => $main_options_title,
-                'entities' => [
-                    'builtin1' => [
-                        'name' => $front_page_title,
-                        'count' => 0
-                    ],
-                    'builtin2' =>[
-                        'name' => $home_title,
-                        'count' => 0
-                    ],
-                    'builtin3' => [
-                        'name' => $category_title,
-                        'count' => 0
-                    ],
-                    'builtin4' => [
-                        'name' => $tag_title,
-                        'count' => 0
-                    ],
-                    'builtin5' => [
-                        'name' => $search_title,
-                        'count' => 0
-                    ],
-                ]
-            ],
-            'taxonomies' => [
-                'type_name' => $tax_title,
-                'entities' => []
-            ],
-            'post_types' => [
-                'type_name' => $archive_title,
-                'entities' => []
-            ],
-        ];
-
-        $result = $default_template;
-
-        foreach ($taxonomies as $tax){
-            $result['taxonomies']['entities'][$tax->name] = [
-                'name' => $tax->label,
-                'count' => 0
-            ];
-        }
-
-        foreach ($post_types as $post_type){
-            $result['post_types']['entities'][$post_type->name] = [
-                'name' => $post_type->label,
-                'count' => 0
-            ];
-        }
-
-        if (!empty($current_options)){
-            foreach ($current_options as $section_name => $section){
-                foreach ($section['entities'] as $entity_slug => $entity_count){
-                    if (isset($result[$section_name]['entities'][$entity_slug])){
-                        $result[$section_name]['entities'][$entity_slug]['count'] = $entity_count;
-                    }
-                }
-            }
-        }
-        return $result;
-    }
-
-    /**
-     * Control pagination with pre_get_posts hook
-     *
-     * @since    1.0.0
-     */
-    public function control_pagination($query) {
-
-        if ( !empty($options = $this->get_current_options()) && !is_admin() && $query->is_main_query() ) {
-            $post_per_page = $this->get_posts_per_page($query, $options);
-            if (!empty($post_per_page)){
-                $query->set( 'posts_per_page', $post_per_page );
-            }
-        }
-
-    }
-
-
-    /**
-     * Allows you to give the correct number of elements on the page when using get_option('posts_per_page')
-     *
-     * @since    1.0.5
-     */
-    public function posts_per_page_interception( $value ) {
-
-        global $wp_query;
-
-        if ( !empty($options = $this->get_current_options()) && !is_admin() && !empty($wp_query->query_vars) ) {
-            $post_per_page = $this->get_posts_per_page($wp_query, $options);
-            if (!empty($post_per_page)){
-                return $post_per_page;
-            }
-        }
-        return $value;
-    }
-
 
     /**
      * Get posts per page for current page type
@@ -321,47 +123,195 @@ class EasyPaginationControlAdmin {
      */
     private function get_posts_per_page( $query, $options ) {
         if ($query->is_front_page()){
-            if (isset($options['builtin']['entities']['builtin1'])){
-                return (int)$options['builtin']['entities']['builtin1'];
+            if (isset($options['builtin']['front-page'])){
+                return (int)$options['builtin']['front-page'];
             }
         }
 
         if ($query->is_home() && !$query->is_front_page()){
-            if (isset($options['builtin']['entities']['builtin2'])){
-                return (int)$options['builtin']['entities']['builtin2'];
+            if (isset($options['builtin']['home'])){
+                return (int)$options['builtin']['home'];
             }
         }
 
         if ($query->is_category()){
-            if (isset($options['builtin']['entities']['builtin3'])){
-                return (int)$options['builtin']['entities']['builtin3'];
+            if (isset($options['builtin']['categories'])){
+                return (int)$options['builtin']['categories'];
             }
         }
 
         if ($query->is_tag()){
-            if (isset($options['builtin']['entities']['builtin4'])){
-                return (int)$options['builtin']['entities']['builtin4'];
+            if (isset($options['builtin']['tags'])){
+                return (int)$options['builtin']['tags'];
             }
         }
 
         if ($query->is_search()){
-            if (isset($options['builtin']['entities']['builtin5'])){
-                return (int)$options['builtin']['entities']['builtin5'];
+            if (isset($options['builtin']['search'])){
+                return (int)$options['builtin']['search'];
             }
         }
 
         if ($query->is_tax()){
-            if ( !empty($query->tax_query) && isset($options['taxonomies']['entities'][key($query->tax_query->queried_terms)])){
-                return (int)$options['taxonomies']['entities'][key($query->tax_query->queried_terms)];
+            if ( !empty($query->tax_query) && isset($options['taxonomies'][key($query->tax_query->queried_terms)])){
+                return (int)$options['taxonomies'][key($query->tax_query->queried_terms)];
             }
         }
 
         if ($query->is_archive() && !$query->is_category() && !$query->is_tag() && !$query->is_tax()){
-            if (isset($options['post_types']['entities'][$query->query_vars['post_type']])){
-                return (int)$options['post_types']['entities'][$query->query_vars['post_type']];
+            if (isset($options['post_types'][$query->query_vars['post_type']])){
+                return (int)$options['post_types'][$query->query_vars['post_type']];
             }
         }
 
         return 0;
+    }
+
+    /**
+     * Register plugin's options
+     *
+     * @since    1.1.0
+     */
+    public function register_options() {
+        register_setting( 'reading', 'epc_options', [
+            'sanitize_callback' => [$this, 'sanitize_options']
+        ]);
+
+        $current_options = $this->get_current_options();
+
+        add_settings_section(
+            'epc_options_title_section',
+            esc_html($this->default_settings['plugin-title']),
+            [$this, 'display_title_section'],
+            'reading'
+        );
+
+        add_settings_section(
+            'epc_options_builtin_section',
+            esc_html($this->default_settings['sections']['builtin']),
+            '',
+            'reading'
+        );
+
+        foreach ($this->default_settings['builtin'] as $entitySlug => $entityName){
+            add_settings_field('epc_option_' . $entitySlug, $entityName, [$this, 'display_input_field'], 'reading', 'epc_options_builtin_section', [
+                'id' => 'epc_option_' . $entitySlug,
+                'name' => 'epc_options[builtin][' . $entitySlug . ']',
+                'value' => !isset( $current_options['builtin'][$entitySlug] ) ? 0 : absint($current_options['builtin'][$entitySlug]),
+                'label_for' => 'epc_option_' . $entitySlug
+            ]);
+        }
+
+        $taxonomies = $this->get_taxonomies();
+        if (!empty($taxonomies)){
+            add_settings_section(
+                'epc_options_tax_section',
+                $this->default_settings['sections']['taxonomies'],
+                '',
+                'reading'
+            );
+            foreach ($taxonomies as $taxonomy){
+                add_settings_field('epc_option_' . $taxonomy->name, $taxonomy->label, [$this, 'display_input_field'], 'reading', 'epc_options_tax_section', [
+                    'id' => 'epc_option_' . $taxonomy->name,
+                    'name' => 'epc_options[taxonomies][' . $taxonomy->name . ']',
+                    'value' => !isset( $current_options['taxonomies'][$taxonomy->name] ) ? 0 : absint($current_options['taxonomies'][$taxonomy->name]),
+                    'label_for' => 'epc_option_' . $taxonomy->name
+                ]);
+            }
+        }
+
+        $post_types = $this->get_post_types();
+        if (!empty($post_types)){
+            add_settings_section(
+                'epc_options_post_types_section',
+                $this->default_settings['sections']['post_types'],
+                '',
+                'reading'
+            );
+            foreach ($post_types as $posttype){
+                add_settings_field('epc_option_' . $posttype->name, $posttype->label, [$this, 'display_input_field'], 'reading', 'epc_options_post_types_section', [
+                    'id' => 'epc_option_' . $posttype->name,
+                    'name' => 'epc_options[post_types][' . $posttype->name . ']',
+                    'value' => !isset( $current_options['post_types'][$posttype->name] ) ? 0 : absint($current_options['post_types'][$posttype->name]),
+                    'label_for' => 'epc_option_' . $posttype->name
+                ]);
+            }
+        }
+    }
+
+    /**
+     * Sanitize callback for options
+     *
+     * @since    1.1.0
+     */
+    public function sanitize_options( $options ) {
+        foreach ($options as &$entity){
+            foreach ($entity as &$count){
+                $count = absint($count);
+            }
+            unset($count);
+        }
+        unset($entity);
+        return $options;
+    }
+
+    /**
+     * Display input field
+     *
+     * @since    1.1.0
+     */
+    public function display_input_field( $args ) {
+        require plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/easy-pagination-control-admin-display-input-field.php';
+    }
+
+    /**
+     * Display title section
+     *
+     * @since    1.1.0
+     */
+    public function display_title_section() {
+        require plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/easy-pagination-control-admin-display-title-section.php';
+    }
+
+    /**
+     * Control pagination with pre_get_posts hook
+     *
+     * @since    1.0.0
+     */
+    public function control_pagination($query) {
+        if ( !empty($options = $this->get_current_options()) && !is_admin() && $query->is_main_query() ) {
+            $post_per_page = $this->get_posts_per_page($query, $options);
+            if (!empty($post_per_page)){
+                $query->set( 'posts_per_page', $post_per_page );
+            }
+        }
+    }
+
+    /**
+     * Allows you to give the correct number of elements on the page when using get_option('posts_per_page')
+     *
+     * @since    1.0.5
+     */
+    public function posts_per_page_interception( $value ) {
+        global $wp_query;
+        if ( !empty($options = $this->get_current_options()) && !is_admin() && !empty($wp_query->query_vars) ) {
+            $post_per_page = $this->get_posts_per_page($wp_query, $options);
+            if (!empty($post_per_page)){
+                return $post_per_page;
+            }
+        }
+        return $value;
+    }
+
+    /**
+     * Add settings link under title
+     *
+     * @since     1.0.0
+     */
+    public function add_settings_link( $links ) {
+        $settings = array(
+            '<a target="_blank" href="/wp-admin/tools.php?page=easy-pagination-control">'.esc_html__('Settings', 'easy-pagination-control').'</a>'
+        );
+        return array_merge( $links, $settings );
     }
 }

@@ -3,8 +3,7 @@
 namespace Difficult13\EasyPaginationControl;
 
 use Difficult13\EasyPaginationControl\Includes\EasyPaginationControl;
-use Difficult13\EasyPaginationControl\Includes\EasyPaginationControlActivator;
-
+use Difficult13\EasyPaginationControl\Includes\EasyPaginationControlDeactivator;
 
 /**
  * The plugin bootstrap file
@@ -17,7 +16,7 @@ use Difficult13\EasyPaginationControl\Includes\EasyPaginationControlActivator;
  * Plugin Name:       Easy Pagination Control
  * Plugin URI:        https://github.com/Difficult13/easy-pagintation-control
  * Description:       A lightweight and easy-to-configure plugin for quickly configuring the number of objects on the archives, categories, tags, taxonomies, home, search page, and front page
- * Version:           1.0.5
+ * Version:           1.1.0
  * Author:            Ivan Barinov
  * Author URI:        https://github.com/Difficult13
  * License:           GPL-2.0+
@@ -38,14 +37,18 @@ esc_html__('A lightweight and easy-to-configure plugin for quickly configuring t
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'EPC_VERSION', '1.0.5' );
+define( 'EPC_VERSION', '1.1.0' );
 
-function activatePlugin() {
-    require_once plugin_dir_path( __FILE__ ) . 'includes/class-easy-pagination-control-activator.php';
-    EasyPaginationControlActivator::activate();
+/**
+ * The code that runs during plugin deactivation.
+ * This action is documented in includes/class-plugin-name-deactivator.php
+ */
+function deactivate_plugin_name() {
+    require_once plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name-deactivator.php';
+    EasyPaginationControlDeactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, __NAMESPACE__ . '\\activatePlugin' );
+register_deactivation_hook( __FILE__, __NAMESPACE__ . '\\deactivate_plugin_name' );
 
 /**
  * The core plugin class that is used to define internationalization,
