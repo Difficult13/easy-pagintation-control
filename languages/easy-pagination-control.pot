@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Easy Pagination Control\n"
-"POT-Creation-Date: 2020-08-15 13:09+0300\n"
+"POT-Creation-Date: 2020-08-18 20:27+0300\n"
 "PO-Revision-Date: 2020-08-15 13:05+0300\n"
 "Last-Translator: \n"
 "Language-Team: Ivan Barinov\n"
@@ -16,74 +16,62 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e;esc_html__;esc_html_e\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: admin/class-easy-pagination-control-admin.php:198
-msgid "Built-in types"
-msgstr ""
-
-#: admin/class-easy-pagination-control-admin.php:199
-msgid "Front Page"
-msgstr ""
-
-#: admin/class-easy-pagination-control-admin.php:200
-msgid "Home"
-msgstr ""
-
-#: admin/class-easy-pagination-control-admin.php:201
-msgid "Categories"
-msgstr ""
-
-#: admin/class-easy-pagination-control-admin.php:202
-msgid "Tags"
-msgstr ""
-
-#: admin/class-easy-pagination-control-admin.php:203
-msgid "Search Page"
-msgstr ""
-
-#: admin/class-easy-pagination-control-admin.php:205
-msgid "Post types"
-msgstr ""
-
-#: admin/class-easy-pagination-control-admin.php:206
-msgid "Taxonomies"
-msgstr ""
-
-#: admin/partials/easy-pagination-control-admin-display.php:22
+#: admin/class-easy-pagination-control-admin.php:58
 msgid "Easy Pagination Control"
 msgstr ""
 
-#: admin/partials/easy-pagination-control-admin-display.php:24
-msgid "Settings were saved successfully"
+#: admin/class-easy-pagination-control-admin.php:60
+msgid "Built-in types"
 msgstr ""
 
-#: admin/partials/easy-pagination-control-admin-display.php:27
-msgid "An error occurred. Try again."
+#: admin/class-easy-pagination-control-admin.php:61
+msgid "Taxonomies"
 msgstr ""
 
-#: admin/partials/easy-pagination-control-admin-display.php:31
+#: admin/class-easy-pagination-control-admin.php:62
+msgid "Post types"
+msgstr ""
+
+#: admin/class-easy-pagination-control-admin.php:65
+msgid "Front Page"
+msgstr ""
+
+#: admin/class-easy-pagination-control-admin.php:66
+msgid "Home"
+msgstr ""
+
+#: admin/class-easy-pagination-control-admin.php:67
+msgid "Categories"
+msgstr ""
+
+#: admin/class-easy-pagination-control-admin.php:68
+msgid "Tags"
+msgstr ""
+
+#: admin/class-easy-pagination-control-admin.php:69
+msgid "Search Page"
+msgstr ""
+
+#: admin/class-easy-pagination-control-admin.php:313
+msgid "Settings"
+msgstr ""
+
+#: admin/partials/easy-pagination-control-admin-display-input-field.php:16
+msgid "elements"
+msgstr ""
+
+#: admin/partials/easy-pagination-control-admin-display-title-section.php:7
 msgid "Enter the number of the desired number of elements on the page opposite the corresponding entity and click \"Save changes\""
 msgstr ""
 
-#: admin/partials/easy-pagination-control-admin-display.php:34
+#: admin/partials/easy-pagination-control-admin-display-title-section.php:10
 msgid "Note."
 msgstr ""
 
-#: admin/partials/easy-pagination-control-admin-display.php:34
+#: admin/partials/easy-pagination-control-admin-display-title-section.php:10
 msgid "The value \"0\" means that standard WP settings are applied"
 msgstr ""
 
-#: admin/partials/easy-pagination-control-admin-display.php:61
-msgid "elements on the page"
-msgstr ""
-
-#: admin/partials/easy-pagination-control-admin-display.php:76
-msgid "Save changes"
-msgstr ""
-
-#: easy-pagination-control.php:34
+#: easy-pagination-control.php:33
 msgid "A lightweight and easy-to-configure plugin for quickly configuring the number of objects on the archives, categories, tags, taxonomies, home, search page, and front page"
-msgstr ""
-
-#: includes/class-easy-pagination-control.php:207
-msgid "Settings"
 msgstr ""
