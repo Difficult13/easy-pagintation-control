@@ -16,6 +16,7 @@ This plugin is designed to create a convenient page for pagination settings for 
 You can only work with the main wordpress query using the "pre_get_posts" hook. Other requests are ignored, which eliminates conflicts with the current theme settings. When developing the plugin, the emphasis was placed on maximum simplicity and minimalism.
 After installation, the plugin must be configured. To do this, go to the "Easy Pagination Control" tab and set the desired number of elements on the page for each entity.
 The plugin was created in order to have more control over the number of elements on pages within the main WP query, since by default, WP offers to specify the number of elements for all pages at once.
+*Since version 1.1.0, Customizer support has been added, so you can now configure pagination directly in the frontend
 
 == Installation ==
 
@@ -36,6 +37,9 @@ For more control over pagination within the main WP query
 == Screenshots ==
 
 1. The Easy Pagination Plugin settings
+2. The Easy Pagination Plugin in Customizer
+3. Built-in section in Customizer
+4. Post Types section in Customizer
 
 == Changelog ==
 
@@ -44,6 +48,9 @@ For more control over pagination within the main WP query
 * Change "Options API" to "Settings API"
 * Moved the plugin settings page to the standard WP section "Reading"
 * General code refactoring
+* Reduced the priority of the "pre_get_posts" event to reduce the chances of conflicts with other pagination plugins
+* Added support for Customizer
+* Update readme
 
 = 1.0.5 =
 

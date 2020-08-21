@@ -256,6 +256,16 @@ class EasyPaginationControlAdmin {
     }
 
     /**
+     * Sanitize callback for customizer
+     *
+     * @since    1.1.0
+     */
+    public function sanitize_customizer( $setting ) {
+        $setting = absint($setting);
+        return $setting;
+    }
+
+    /**
      * Display input field
      *
      * @since    1.1.0
@@ -304,13 +314,100 @@ class EasyPaginationControlAdmin {
     }
 
     /**
+     * Register Customizer options
+     *
+     * @since    1.1.0
+     */
+    public function register_customizer_options( \WP_Customize_Manager $wp_customize ) {
+
+        $wp_customize->add_panel('epc-customizer-panel', [
+            'title' => esc_html__('Easy Pagination Control', 'easy-pagination-control'),
+            'priority' => 250,
+        ]);
+
+        $wp_customize->add_section('epc-customizer-builtin', [
+            'title' => $this->default_settings['sections']['builtin'],
+            'priority' => 1,
+            'panel' => 'epc-customizer-panel'
+        ]);
+
+        $current_options = $this->get_current_options();
+
+        foreach ($this->default_settings['builtin'] as $entitySlug => $entityName){
+            $wp_customize->add_setting( 'epc_options[builtin][' . $entitySlug . ']', array(
+                'type'                 => 'option',
+                'default'              => 0,
+                'sanitize_callback'    => [$this, 'sanitize_customizer'],
+            ) );
+
+            $wp_customize->add_control( 'epc_options[builtin][' . $entitySlug . ']', [
+                'section'   => 'epc-customizer-builtin',
+                'label'     => $entityName,
+                'type'      => 'number'
+            ]);
+        }
+
+        $taxonomies = $this->get_taxonomies();
+        if (!empty($taxonomies)){
+
+            $wp_customize->add_section('epc-customizer-taxonomies', [
+                'title' => $this->default_settings['sections']['taxonomies'],
+                'priority' => 2,
+                'panel' => 'epc-customizer-panel'
+            ]);
+
+            foreach ($taxonomies as $taxonomy){
+                $wp_customize->add_setting( 'epc_options[taxonomies][' . $taxonomy->name . ']', array(
+                    'type'                 => 'option',
+                    'default'              => 0,
+                    'sanitize_callback'    => [$this, 'sanitize_customizer'],
+                ) );
+
+                $wp_customize->add_control( 'epc_options[taxonomies][' . $taxonomy->name . ']', [
+                    'section'   => 'epc-customizer-taxonomies',
+                    'label'     => $taxonomy->label,
+                    'type'      => 'number'
+                ]);
+            }
+        }
+
+        $post_types = $this->get_post_types();
+        if (!empty($post_types)){
+
+            $wp_customize->add_section('epc-customizer-post_types', [
+                'title' => $this->default_settings['sections']['post_types'],
+                'priority' => 3,
+                'panel' => 'epc-customizer-panel'
+            ]);
+
+            foreach ($post_types as $post_type){
+
+                $wp_customize->add_setting( 'epc_options[post_types][' . $post_type->name . ']', array(
+                    'type'                 => 'option',
+                    'default'              => 0,
+                    'sanitize_callback'    => [$this, 'sanitize_customizer'],
+                ) );
+
+                $wp_customize->add_control( 'epc_options[post_types][' . $post_type->name . ']', [
+                    'section'   => 'epc-customizer-post_types',
+                    'label'     => $post_type->label,
+                    'type'      => 'number'
+                ]);
+            }
+        }
+
+
+
+    }
+
+    /**
      * Add settings link under title
      *
      * @since     1.0.0
      */
     public function add_settings_link( $links ) {
         $settings = array(
-            '<a target="_blank" href="/wp-admin/tools.php?page=easy-pagination-control">'.esc_html__('Settings', 'easy-pagination-control').'</a>'
+            '<a target="_blank" href="/wp-admin/options-reading.php">'.esc_html__('Settings', 'easy-pagination-control').'</a>'
         );
         return array_merge( $links, $settings );
     }

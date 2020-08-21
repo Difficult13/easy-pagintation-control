@@ -151,7 +151,8 @@ class EasyPaginationControl {
         $this->loader->add_filter( 'plugin_action_links_'.$this->basename, $plugin_admin, 'add_settings_link' );
         $this->loader->add_filter( 'option_posts_per_page', $plugin_admin, 'posts_per_page_interception' );
         $this->loader->add_action( 'admin_init', $plugin_admin, 'register_options' );
-        $this->loader->add_action( 'pre_get_posts', $plugin_admin, 'control_pagination' );
+        $this->loader->add_action( 'customize_register', $plugin_admin, 'register_customizer_options' );
+        $this->loader->add_action( 'pre_get_posts', $plugin_admin, 'control_pagination', 5 );
 	}
 
 	/**
