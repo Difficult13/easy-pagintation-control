@@ -122,13 +122,14 @@ class EasyPaginationControlAdmin {
      * @return integer
      */
     private function get_posts_per_page( $query, $options ) {
-        if ($query->is_front_page()){
+
+        if ($this->is_front_page($query)){
             if (isset($options['builtin']['front-page'])){
                 return (int)$options['builtin']['front-page'];
             }
         }
 
-        if ($query->is_home() && !$query->is_front_page()){
+        if ($query->is_home() && !$this->is_front_page($query)){
             if (isset($options['builtin']['home'])){
                 return (int)$options['builtin']['home'];
             }
@@ -158,13 +159,33 @@ class EasyPaginationControlAdmin {
             }
         }
 
-        if ($query->is_archive() && !$query->is_category() && !$query->is_tag() && !$query->is_tax()){
+        if ($query->is_post_type_archive()){
             if (isset($options['post_types'][$query->query_vars['post_type']])){
                 return (int)$options['post_types'][$query->query_vars['post_type']];
             }
         }
 
         return 0;
+    }
+
+    /**
+     * Check front page with fix
+     *
+     * @since    1.1.1
+     *
+     * @param $query
+     * @return boolean
+     */
+    private function is_front_page( $query ) {
+        if ( 'posts' === get_option( 'show_on_front' ) && $query->is_home() ) {
+            return true;
+        } elseif ( 'page' === get_option( 'show_on_front' ) && get_option( 'page_on_front' )
+            && $query->get( 'page_id' ) === get_option( 'page_on_front' )
+        ) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

@@ -43,6 +43,10 @@ For more control over pagination within the main WP query
 
 == Changelog ==
 
+= 1.1.1 =
+* Add advanced is_front_page() function for static front page compatibilities
+* Simplified method for determining the archive page of a post type
+
 = 1.1.0 =
 
 * Change "Options API" to "Settings API"
