@@ -17,6 +17,7 @@ You can only work with the main wordpress query using the "pre_get_posts" hook. 
 After installation, the plugin must be configured. To do this, go to the "Easy Pagination Control" tab and set the desired number of elements on the page for each entity.
 The plugin was created in order to have more control over the number of elements on pages within the main WP query, since by default, WP offers to specify the number of elements for all pages at once.
 *Since version 1.1.0, Customizer support has been added, so you can now configure pagination directly in the frontend
+*Since version 1.1.2, the public function easy_pagination_control_get_ppp($Entity) has been added. As an argument, it gets the name of the entity ('Front-Page', 'Home', 'categories', 'Tags', 'Search', or post type's slug, or taxonomy's slug). Returns the number of elements on the page.
 
 == Installation ==
 
@@ -42,6 +43,9 @@ For more control over pagination within the main WP query
 4. Post Types section in Customizer
 
 == Changelog ==
+
+= 1.1.2=
+* Add public function easy_pagination_control_get_ppp($entity). This function allows you to extract the number of posts per page for the specified entity.
 
 = 1.1.1 =
 * Add advanced is_front_page() function for static front page compatibilities

@@ -432,4 +432,63 @@ class EasyPaginationControlAdmin {
         );
         return array_merge( $links, $settings );
     }
+
+
+    /**
+     * Get posts_per_page for any entity
+     *
+     * @since     1.1.2
+     */
+    public static function get_posts_per_page_for_entity( $entity ) {
+
+        $allowed_builtin = [
+            'front-page',
+            'home',
+            'categories',
+            'tags',
+            'search'
+        ];
+
+        $args = [
+            'public' => true,
+            '_builtin' => false
+        ];
+        $allowed_taxonomies = get_taxonomies( $args, 'objects' );
+
+        $args = [
+            'public' => true,
+            '_builtin' => false
+        ];
+        $allowed_post_types = get_post_types( $args, 'objects' );
+
+
+        if (
+            !in_array($entity, $allowed_builtin)
+            &&
+            !key_exists($entity, $allowed_post_types)
+            &&
+            !key_exists($entity, $allowed_taxonomies)
+        ) return false;
+
+        $current_options = get_option('epc_options');
+
+        if (empty($current_options)) return false;
+
+
+
+        foreach ( $current_options as $section){
+            foreach ($section as $section_entity => $posts_per_page){
+
+                if ($section_entity === $entity){
+                    if ($posts_per_page == 0){
+                        return (int) get_option('posts_per_page');
+                    }else {
+                        return (int) $posts_per_page;
+                    }
+                }
+            }
+        }
+
+        return (int) get_option('posts_per_page');
+    }
 }

@@ -1,7 +1,5 @@
 <?php
 
-namespace Difficult13\EasyPaginationControl;
-
 use Difficult13\EasyPaginationControl\Includes\EasyPaginationControl;
 use Difficult13\EasyPaginationControl\Includes\EasyPaginationControlDeactivator;
 
@@ -16,7 +14,7 @@ use Difficult13\EasyPaginationControl\Includes\EasyPaginationControlDeactivator;
  * Plugin Name:       Easy Pagination Control
  * Plugin URI:        https://github.com/Difficult13/easy-pagintation-control
  * Description:       A lightweight and easy-to-configure plugin for quickly configuring the number of objects on the archives, categories, tags, taxonomies, home, search page, and front page
- * Version:           1.1.1
+ * Version:           1.1.2
  * Author:            Ivan Barinov
  * Author URI:        https://github.com/Difficult13
  * License:           GPL-2.0+
@@ -37,13 +35,13 @@ esc_html__('A lightweight and easy-to-configure plugin for quickly configuring t
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'EPC_VERSION', '1.1.1' );
+define( 'EPC_VERSION', '1.1.2' );
 
 /**
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-plugin-name-deactivator.php
  */
-function deactivate_plugin_name() {
+function easy_pagination_control_deactivate_plugin() {
     require_once plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name-deactivator.php';
     EasyPaginationControlDeactivator::deactivate();
 }
@@ -65,9 +63,18 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-easy-pagination-control.ph
  *
  * @since    1.0.0
  */
-function runPlugin() {
+function easy_pagination_control_runPlugin() {
     $basename = plugin_basename(__FILE__);
-	$plugin = new EasyPaginationControl($basename);
-	$plugin->run();
+    $plugin = new EasyPaginationControl($basename);
+    $plugin->run();
 }
-runPlugin();
+easy_pagination_control_runPlugin();
+
+/**
+ * Get posts per page for any entity
+ *
+ * @since    1.1.2
+ */
+function easy_pagination_control_get_ppp($entity = 'front-page') {
+    return \Difficult13\EasyPaginationControl\Admin\EasyPaginationControlAdmin::get_posts_per_page_for_entity($entity);
+}
