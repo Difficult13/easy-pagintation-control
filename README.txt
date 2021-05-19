@@ -2,7 +2,7 @@
 Contributors: pet1t
 Tags: pagination, usability, control, easy
 Requires at least: 5.4.2
-Tested up to: 5.5
+Tested up to: 5.7.2
 Requires PHP: 7.0
 Stable tag: trunk
 License: GPLv2 or later
@@ -43,6 +43,10 @@ For more control over pagination within the main WP query
 4. Post Types section in Customizer
 
 == Changelog ==
+
+= 1.1.3=
+* Fix an erroneous link to the settings page
+* Added slugs to terms on the settings page to avoid name collisions
 
 = 1.1.2=
 * Add public function easy_pagination_control_get_ppp($entity). This function allows you to extract the number of posts per page for the specified entity.

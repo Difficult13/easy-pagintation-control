@@ -232,7 +232,7 @@ class EasyPaginationControlAdmin {
                 'reading'
             );
             foreach ($taxonomies as $taxonomy){
-                add_settings_field('epc_option_' . $taxonomy->name, $taxonomy->label, [$this, 'display_input_field'], 'reading', 'epc_options_tax_section', [
+                add_settings_field('epc_option_' . $taxonomy->name, $taxonomy->label . "<br>({$taxonomy->name})", [$this, 'display_input_field'], 'reading', 'epc_options_tax_section', [
                     'id' => 'epc_option_' . $taxonomy->name,
                     'name' => 'epc_options[taxonomies][' . $taxonomy->name . ']',
                     'value' => !isset( $current_options['taxonomies'][$taxonomy->name] ) ? 0 : absint($current_options['taxonomies'][$taxonomy->name]),
@@ -427,8 +427,9 @@ class EasyPaginationControlAdmin {
      * @since     1.0.0
      */
     public function add_settings_link( $links ) {
+
         $settings = array(
-            '<a target="_blank" href="/wp-admin/options-reading.php">'.esc_html__('Settings', 'easy-pagination-control').'</a>'
+            '<a target="_blank" href="' . esc_url(admin_url( '/options-reading.php' )) . '">'.esc_html__('Settings', 'easy-pagination-control').'</a>'
         );
         return array_merge( $links, $settings );
     }
